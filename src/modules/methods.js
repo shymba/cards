@@ -3,11 +3,33 @@ import {modalShow} from "./modal.js";
 const cardContainer = document.getElementById('card-container');
 const loading = document.querySelector('.loader');
 const modal = document.querySelector('.modal');
-const modalText = document.getElementById('modal-text')
+const toggleBtn = document.querySelector('input[type="checkbox"]');
 
 let limit = 0;
 let page = 0;
 let dataFetch = [];
+
+async function fillCards() {
+
+    if(toggleBtn.checked) {
+        limit = 10;
+        page ++;
+        await getCards()
+            showCards()
+        console.log(window.innerHeight);
+        console.log(window.innerWidth);
+
+        console.log('checked')
+    } else  {
+        limit = 0;
+        page = 0;
+        await getCards()
+        showCards()
+        console.log('no checked')
+    }
+}
+
+toggleBtn.addEventListener('change', fillCards)
 
 const methods = {
     getCards: async () => {
@@ -25,11 +47,11 @@ const methods = {
         dataFetch.pop();
         showCards();
     },
-    fillCards: async () => {
-        limit = 12;
-        await getCards()
-        showCards()
-    },
+    // fillCards: async () => {
+    //     limit = 12;
+    //     await getCards()
+    //     showCards()
+    // },
     clearAllCards: () => {
         dataFetch = dataFetch.slice(0, 1);
         showCards();
@@ -104,6 +126,6 @@ window.onclick = function(e) {
 export const getCards = methods.getCards;
 export const addCards = methods.addCards;
 export const removeLastCard = methods.removeLastCard;
-export const fillCards = methods.fillCards;
+// export const fillCards = methods.fillCards;
 export const clearAllCards = methods.clearAllCards;
 export const showLoading = methods.showLoading;
