@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cards</title>
+</head>
+<body>
+
+<header>
+    <div class="btns-container">
+        <button class="btn" id="add-card">Add Card</button>
+        <button class="btn remove-last-btn" id="remove-last">Remove Last</button>
+        <button class="btn" id="fill-container">Fill</button>
+        <button class="btn" id="clear-all-card">Clear all Cards</button>
+    </div>
+</header>
+
+<div class="card-container" id="card-container"></div>
+
+<div class="loader">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+
+<div class="modal">
+    <div class="modal-content">
+        <p id="modal-text"></p>
+    </div>
+</div>
+
+</body>
+</html>
