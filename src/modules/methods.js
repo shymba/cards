@@ -9,28 +9,6 @@ let limit = 0;
 let page = 0;
 let dataFetch = [];
 
-async function fillCards() {
-
-    if(toggleBtn.checked) {
-        limit = 10;
-        page ++;
-        await getCards()
-            showCards()
-        console.log(window.innerHeight);
-        console.log(window.innerWidth);
-
-        console.log('checked')
-    } else  {
-        limit = 0;
-        page = 0;
-        await getCards()
-        showCards()
-        console.log('no checked')
-    }
-}
-
-toggleBtn.addEventListener('change', fillCards)
-
 const methods = {
     getCards: async () => {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}=&_page=${page}`)
@@ -47,11 +25,6 @@ const methods = {
         dataFetch.pop();
         showCards();
     },
-    // fillCards: async () => {
-    //     limit = 12;
-    //     await getCards()
-    //     showCards()
-    // },
     clearAllCards: () => {
         dataFetch = dataFetch.slice(0, 1);
         showCards();
@@ -110,6 +83,15 @@ function showCards() {
     });
 }
 
+async function fillCards() {
+    if (toggleBtn.checked) {
+        limit = Math.floor((window.innerWidth / 250) * 2);
+        page++;
+        await getCards()
+        showCards()
+    }
+}
+
 function removeCard(event) {
     const idModal = +event.target.getAttribute('id');
     dataFetch = dataFetch.filter(card => card.id !== idModal);
@@ -123,9 +105,10 @@ window.onclick = function(e) {
     }
 }
 
+toggleBtn.addEventListener('change', fillCards);
+
 export const getCards = methods.getCards;
 export const addCards = methods.addCards;
 export const removeLastCard = methods.removeLastCard;
-// export const fillCards = methods.fillCards;
 export const clearAllCards = methods.clearAllCards;
 export const showLoading = methods.showLoading;
